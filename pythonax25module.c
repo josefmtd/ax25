@@ -220,13 +220,13 @@ static PyObject *  packet_rx(PyObject* self, PyObject* args) {
                           receiveBuffer, packetSize);
 }
 
-static PyObject *PythonAx25Error;
+static PyObject *Ax25Error;
 
 //////////////////////////////////////////
 // Define methods
 //////////////////////////////////////////
 
-static PyMethodDef python_ax25_functions[] = {
+static PyMethodDef ax25_functions[] = {
     {"config_load_ports", config_load_ports, METH_VARARGS, ""},
     {"config_get_first_port", config_get_first_port, METH_VARARGS, ""},
     {"config_get_next_port", config_get_next_port, METH_VARARGS, ""},
@@ -250,10 +250,10 @@ static PyMethodDef python_ax25_functions[] = {
 // Initialize module
 static struct PyModuleDef moduledef = {
   PyModuleDef_HEAD_INIT,
-  "pythonax25",
+  "ax25",
   "This is a python module for ax.25",
   -1,
-  python_ax25_functions,
+  ax25_functions,
   NULL,
   NULL,
   NULL,
@@ -262,16 +262,16 @@ static struct PyModuleDef moduledef = {
 
 PyMODINIT_FUNC
 
-PyInit_pythonax25(void) {
+PyInit_ax25(void) {
   PyObject * m;
   m = PyModule_Create(&moduledef);
 
   if (m == NULL)
     return NULL;
 
-  PythonAx25Error = PyErr_NewException("pythonax25.error", NULL, NULL);
-  Py_INCREF(PythonAx25Error);
-  PyModule_AddObject(m, "error", PythonAx25Error);
+  Ax25Error = PyErr_NewException("ax25.error", NULL, NULL);
+  Py_INCREF(Ax25Error);
+  PyModule_AddObject(m, "error", Ax25Error);
 
   return m;
 }
